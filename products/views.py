@@ -1,4 +1,5 @@
 from django.views.generic import ListView, DetailView
+from django.http import Http404
 
 from .models import Product
 
@@ -23,7 +24,16 @@ class ProductDetailView(DetailView):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         return context
 
-    def get_queryset(self):
+    def get_object(self, queryset=None):
         request = self.request
-        pk = self.kwargs.get('pk')
-        return Product.objects.filter(pk=pk)
+        slug = self.kwargs.get('slug')
+        try:
+            instance = Product.objects.get(slug=slug, active=True)
+        except Product.DoesNotExist:
+            raise Http404('Not found ((')
+        except Product.MultipleObjectsReturned:
+            queryset = Product.objects.filter(slug=slug, active=True)
+            return queryset.first
+        except:
+            raise Http404
+        return instance
