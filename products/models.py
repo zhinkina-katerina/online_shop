@@ -63,6 +63,9 @@ class Product(models.Model):
     def __unicode__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return f'products{self.slug}'
+
 def product_pre_save_reciever(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)
