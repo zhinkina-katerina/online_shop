@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.views.generic.list import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Product
+
 
 class ProductListView(ListView):
     queryset = Product.objects.all()
@@ -12,4 +12,10 @@ class ProductListView(ListView):
         return context
 
 
-# Create your views here.
+class ProductDetailView(DetailView):
+    queryset = Product.objects.all()
+    template_name = 'products/product_detail.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        return context
