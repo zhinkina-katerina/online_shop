@@ -12,10 +12,16 @@ class ProductListView(ListView):
         return context
 
 
+
+
 class ProductDetailView(DetailView):
-    queryset = Product.objects.all()
     template_name = 'products/product_detail.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         return context
+
+    def get_queryset(self):
+        request = self.request
+        pk = self.kwargs.get('pk')
+        return Product.objects.filter(pk=pk)
