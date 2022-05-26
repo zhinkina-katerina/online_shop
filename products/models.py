@@ -3,6 +3,7 @@ import os
 from django.db import models
 from .utils import unique_slug_generator
 from django.db.models.signals import pre_save, post_save
+from django.shortcuts import reverse
 
 
 def get_filename_extensions(filename):
@@ -64,7 +65,7 @@ class Product(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return f'products{self.slug}'
+        return reverse('product_detail', kwargs={'slug': self.slug})
 
 def product_pre_save_reciever(sender, instance, *args, **kwargs):
     if not instance.slug:
