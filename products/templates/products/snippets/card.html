@@ -1,11 +1,17 @@
-<div class="card" style="width: 18rem;">
-    {%  if instance.image %}
-  <img src="{{instance.image.url}}" class="card-img-top" alt="...">
-    {% endif %}
-  <div class="card-body">
-    <h5 class="card-title">{{ instance.title }}</h5>
-    <p class="card-text">{{ instance.description }}</p>
-    <p class="card-text">{{ instance.price }}</p>
-    <a href="{{ instance.get_absolute_url }}" class="btn btn-primary">Подробнее</a>
-  </div>
+<div class="card h-100">
+    <!-- Product image-->
+    <img class="card-img-top" src="{{instance.image.url}}"   alt="{{ instance.title }}" />
+    <!-- Product details-->
+    <div class="card-body p-4">
+        <div class="text-center">
+            <!-- Product name-->
+            <h5 class="fw-bolder">{{ instance.title }}</h5>
+            <!-- Product price-->
+            $ {{ instance.price }}
+        </div>
+    </div>
+    <!-- Product actions-->
+    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ instance.get_absolute_url }}">View options</a></div>
+    </div>
 </div>
