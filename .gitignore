@@ -131,4 +131,5 @@ dmypy.json
 .pyre/
 
 #Media
-/static_cdn/media_root/
+/media_root/
+
