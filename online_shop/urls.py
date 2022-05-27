@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from products.views import CategoryListView
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('products.urls', namespace='products') ),
+    path('', CategoryListView.as_view(), name='index'),
+    path('products/', include('products.urls', namespace='products')),
 ]
 
 if settings.DEBUG:
