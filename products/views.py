@@ -3,6 +3,15 @@ from django.http import Http404
 
 from .models import Product
 
+class CategoryListView(ListView):
+    template_name = 'index.html'
+    queryset = Product.objects.get_active()
+
+
+
+
+
+
 
 class ProductListView(ListView):
     template_name = 'products/product_list.html'
