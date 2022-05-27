@@ -2,24 +2,79 @@
 
 <!DOCTYPE html>
     <html lang="en">
-    <head>
-      <!-- Required meta tags -->
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-      <link rel='stylesheet' href='{% static "css/main.css" %}' >
-    </head>
+    <!-- Title  -->
+    <title>Amado - Furniture Ecommerce Template | Shop</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+
+    <!-- Core Style CSS -->
+    <link rel="stylesheet" href="{% static 'css/core-style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+
     <body>
-    {%  include 'base/navbar.html'%}
-    {% block content %}
-    {% endblock %}
+    <!-- Search Wrapper Area Start -->
+    <div class="search-wrapper section-padding-100">
+        <div class="search-close">
+            <i class="fa fa-close" aria-hidden="true"></i>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="search-content">
+                        <form action="#" method="get">
+                            <input type="search" name="search" id="search" placeholder="Type your keyword...">
+                            <button type="submit"><img src="img/core-img/search.png" alt=""></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Search Wrapper Area End -->
 
-      <!-- Optional JavaScript -->
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-    </body>
+    <!-- ##### Main Content Wrapper Start ##### -->
+    <div class="main-content-wrapper d-flex clearfix">
+
+
+        {% include 'base/sidebar.html' %}
+{#        {% include 'base/shop_sidebar.html' %}#}
+        {%  block content %}
+        {% endblock %}
+
+
+
+
+    </div>
+    <!-- ##### Main Content Wrapper End ##### -->
+
+    {% include 'base/newsletter_area.html' %}
+    {% include 'base/footer.html' %}
+
+
+
+    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Plugins js -->
+    <script src="{% static  'js/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'js/active.js' %}"></script><a id="scrollUp" href="#top" style="display: none; position: fixed; z-index: 2147483647;"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+
+
+
+</body>
   </html>
