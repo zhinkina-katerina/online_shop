@@ -1,5 +1,6 @@
 import random
 import os
+from django.db.models import Q
 from django.db import models
 from .utils import unique_slug_generator
 from django.db.models.signals import pre_save, post_save
@@ -16,22 +17,28 @@ def upload_image_path(instance, filename):
     new_filename = random.randint(1, 4654654)
     name, extension = get_filename_extensions(filename)
     final_filename = '{new_filename}{extension}'.format(
-                                                new_filename=new_filename,
-                                                extension=extension
-                                            )
+        new_filename=new_filename,
+        extension=extension
+    )
     return 'products/{new_filename}/{final_filename}'.format(
-                                                    final_filename=final_filename,
-                                                    new_filename=new_filename
-                                                )
+        final_filename=final_filename,
+        new_filename=new_filename
+    )
+
 
 class ProductQuerySet(models.query.QuerySet):
     def active(self):
         return self.filter(active=True)
+
     def featured(self):
         return self.filter(featured=True)
 
+    def search(self, query):
+        lookups = Q(title__icontains=query) | Q(description__icontains=query)
+        return self.filter(lookups).distinct()
 
-class ProductManager (models.Manager):
+
+class ProductManager(models.Manager):
     def get_queryset(self):
         return ProductQuerySet(self.model, using=self._db)
 
@@ -47,12 +54,16 @@ class ProductManager (models.Manager):
             return queryset.first()
         return None
 
+    def search(self, query):
+        return self.get_queryset().active().search(query)
+
+
 class Product(models.Model):
     title = models.CharField(max_length=120)
     slug = models.SlugField(blank=True, unique=True)
     description = models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=10)
-    image = models.ImageField(upload_to=upload_image_path, null=True, blank=True )
+    image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     featured = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
 
@@ -67,7 +78,10 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('products:product_detail', kwargs={'slug': self.slug})
 
+
 def product_pre_save_reciever(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)
+
+
 pre_save.connect(product_pre_save_reciever, sender=Product)
