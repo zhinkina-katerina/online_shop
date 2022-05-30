@@ -1,0 +1,6 @@
+<div class="search-content">
+    <form action="{% url 'search:query' %}" method="GET">
+        <input type="search" name="q" id="search" placeholder="Type your keyword..." value="{{ request.GET.q }}">
+        <button type="submit"><img src="img/core-img/search.png" alt=""></button>
+    </form>
+</div>

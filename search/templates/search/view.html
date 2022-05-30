@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{%  block content %}
+<div class="amado_product_area section-padding-100">
+{%  if query %}
+    <div class="col-12 mb-3">
+        Searched for <b>{{ query }}</b>
+        <hr></hr>
+    </div>
+{% endif %}
+            <div class="container-fluid">
+
+                {% include 'products/snippets/filter_products.html' %}
+
+
+
+
+                <div class="row">
+
+                    <!-- Single Product Area -->
+                    {%  for product in object_list %}
+                        {% include 'products/snippets/card.html' with instance=product %}
+                    {% endfor %}
+
+                {% if not object_list %}
+                    <div class="col-12 mb-3">
+                    No results found
+                    </div>
+
+                {% endif %}
+
+
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Pagination -->
+                        <nav aria-label="navigation">
+                            <ul class="pagination justify-content-end mt-50">
+                                <li class="page-item active"><a class="page-link" href="#">01.</a></li>
+                                <li class="page-item"><a class="page-link" href="#">02.</a></li>
+                                <li class="page-item"><a class="page-link" href="#">03.</a></li>
+                                <li class="page-item"><a class="page-link" href="#">04.</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+{%  endblock %}

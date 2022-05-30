@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', CategoryListView.as_view(), name='index'),
     path('products/', include('products.urls', namespace='products')),
+    path('search/', include('search.urls', namespace='search'))
 ]
 
 if settings.DEBUG:
