@@ -1,9 +1,11 @@
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import pre_save, m2m_changed
 
 from products.models import Product
 
 User = settings.AUTH_USER_MODEL
+
 
 class CartManager(models.Manager):
 
@@ -31,8 +33,6 @@ class CartManager(models.Manager):
         return cart_object, is_new_object
 
 
-
-
 class Cart(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, blank=True)
@@ -44,3 +44,19 @@ class Cart(models.Model):
 
     def __str__(self):
         return str(self.id)
+
+
+def m2m_changed_cart_reciever(sender, instance, action, *args, **kwargs):
+    actions = ['post_add',
+               'post_remove',
+               'post_clear'
+               ]
+    if action in actions:
+        products = instance.products.all()
+        instance.total = 0
+        for x in products:
+            instance.total += x.price
+        instance.save()
+
+
+m2m_changed.connect(m2m_changed_cart_reciever, sender=Cart.products.through)
