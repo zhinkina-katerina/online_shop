@@ -18,13 +18,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from products.views import CategoryListView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', CategoryListView.as_view(), name='index'),
     path('products/', include('products.urls', namespace='products')),
-    path('search/', include('search.urls', namespace='search'))
+    path('search/', include('search.urls', namespace='search')),
+    path('cart/', include('carts.urls', namespace='carts'))
 ]
 
 if settings.DEBUG:
-     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
