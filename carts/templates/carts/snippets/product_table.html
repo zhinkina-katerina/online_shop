@@ -1,0 +1,49 @@
+{% load static %}
+<div class="col-12 col-lg-8">
+    <div class="cart-title mt-50">
+        <h2>Shopping Cart</h2>
+    </div>
+    <div class="cart-table clearfix">
+        <table class="table table-responsive" style="overflow: hidden; outline: none;" tabindex="1">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                <td class="cart_product_img">
+                    <a href="#"><img src="{{ product.image.url }} " alt="Product"></a>
+                </td>
+                <td class="cart_product_desc">
+                    <h5>{{ product.title }}</h5>
+                </td>
+                <td class="price">
+                    <span>$ {{ product.price }}</span>
+                </td>
+                <td class="qty">
+
+                    <div class="qty-btn d-flex">
+                        <p>Qty</p>
+                        <div class="quantity">
+                        <p>{{ product.quantity }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-2 ml-5">
+                        <form method="POST" action={% url 'carts:remove'%}> {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <input type="image"  src={% static "img/core-img/remove-from-cart.png" %} alt="remove">
+                        </form>
+                    </div>
+                </td>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
