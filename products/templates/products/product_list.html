@@ -1,34 +1,34 @@
 {% extends 'base.html' %}
 
-{%  block content %}
-<div class="amado_product_area section-padding-100">
-            <div class="container-fluid">
+{% block content %}
+    <div class="amado_product_area section-padding-100">
+        <div class="container-fluid">
 
-                {% include 'products/snippets/filter_products.html' %}
+            {% include 'products/snippets/filter_products.html' %}
 
-                <div class="row">
+            <div class="row">
 
-                    <!-- Single Product Area -->
-                    {%  for product in object_list %}
-                        {% include 'products/snippets/card.html' with instance=product %}
-                    {% endfor %}
+                <!-- Single Product Area -->
+                {% for product in object_list %}
+                    {% include 'products/snippets/card.html' with instance=product %}
+                {% endfor %}
 
 
 
                 <div class="row">
                     <div class="col-12">
-                        <!-- Pagination -->
-                        <nav aria-label="navigation">
-                            <ul class="pagination justify-content-end mt-50">
-                                <li class="page-item active"><a class="page-link" href="#">01.</a></li>
-                                <li class="page-item"><a class="page-link" href="#">02.</a></li>
-                                <li class="page-item"><a class="page-link" href="#">03.</a></li>
-                                <li class="page-item"><a class="page-link" href="#">04.</a></li>
-                            </ul>
-                        </nav>
+                        {#                        <!-- Pagination -->#}
+                        {#                        <nav aria-label="navigation">#}
+                        {#                            <ul class="pagination justify-content-end mt-50">#}
+                        {#                                <li class="page-item active"><a class="page-link" href="#">01.</a></li>#}
+                        {#                                <li class="page-item"><a class="page-link" href="#">02.</a></li>#}
+                        {#                                <li class="page-item"><a class="page-link" href="#">03.</a></li>#}
+                        {#                                <li class="page-item"><a class="page-link" href="#">04.</a></li>#}
+                        {#                            </ul>#}
+                        {#                        </nav>#}
                     </div>
                 </div>
             </div>
         </div>
-</div>
-{%  endblock %}
+    </div>
+{% endblock %}

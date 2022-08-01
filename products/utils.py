@@ -1,5 +1,7 @@
+import os
 import random
 import string
+
 from django.utils.text import slugify
 
 
@@ -26,3 +28,22 @@ def unique_slug_generator(instance, new_slug=None):
         )
         return unique_slug_generator(instance, new_slug=new_slug)
     return slug
+
+
+def get_filename_extensions(filename):
+    base_name = os.path.basename(filename)
+    name, extension = os.path.splitext(base_name)
+    return name, extension
+
+
+def upload_image_path(instance, filename):
+    new_filename = random.randint(1, 4654654)
+    name, extension = get_filename_extensions(filename)
+    final_filename = '{new_filename}{extension}'.format(
+        new_filename=new_filename,
+        extension=extension
+    )
+    return 'products/{new_filename}/{final_filename}'.format(
+        final_filename=final_filename,
+        new_filename=new_filename
+    )

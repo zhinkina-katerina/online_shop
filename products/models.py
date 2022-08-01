@@ -1,29 +1,14 @@
-import random
-import os
-from django.db.models import Q
 from django.db import models
-from .utils import unique_slug_generator
-from django.db.models.signals import pre_save, post_save
+from django.db.models import Q
+from django.db.models.signals import pre_save
 from django.shortcuts import reverse
 
-
-def get_filename_extensions(filename):
-    base_name = os.path.basename(filename)
-    name, extension = os.path.splitext(base_name)
-    return name, extension
+from .utils import unique_slug_generator, upload_image_path
 
 
-def upload_image_path(instance, filename):
-    new_filename = random.randint(1, 4654654)
-    name, extension = get_filename_extensions(filename)
-    final_filename = '{new_filename}{extension}'.format(
-        new_filename=new_filename,
-        extension=extension
-    )
-    return 'products/{new_filename}/{final_filename}'.format(
-        final_filename=final_filename,
-        new_filename=new_filename
-    )
+class Category(models.Model):
+    title = models.CharField(max_length=255)
+    image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
 
 
 class ProductQuerySet(models.query.QuerySet):
@@ -38,6 +23,9 @@ class ProductQuerySet(models.query.QuerySet):
                    Q(description__icontains=query) |
                    Q(tag__title__icontains=query))
         return self.filter(lookups).distinct()
+
+    def with_id_in(self, ids):
+        return self.filter(id__in=ids)
 
 
 class ProductManager(models.Manager):
@@ -59,6 +47,16 @@ class ProductManager(models.Manager):
     def search(self, query):
         return self.get_queryset().active().search(query)
 
+    def get_products_with_id_in(self, list_id):
+        return self.get_queryset().with_id_in(list_id)
+
+    def get_products_with_quantity_and_total(self, dict_with_quantity):
+        products = self.get_queryset().with_id_in(dict_with_quantity.keys())
+        for item in products:
+            item.quantity = dict_with_quantity[str(item.id)]
+        total = sum([item.price * int(item.quantity) for item in products])
+        return products, total
+
 
 class Product(models.Model):
     title = models.CharField(max_length=120)
@@ -68,6 +66,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     featured = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     objects = ProductManager()
 
