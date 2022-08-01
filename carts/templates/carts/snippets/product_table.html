@@ -30,14 +30,14 @@
                     <div class="qty-btn d-flex">
                         <p>Qty</p>
                         <div class="quantity">
-                        <p>{{ product.quantity }}</p>
+                            <p>{{ product.quantity }}</p>
                         </div>
                     </div>
 
                     <div class="mt-2 ml-5">
-                        <form method="POST" action={% url 'carts:remove'%}> {% csrf_token %}
+                        <form method="POST" action={% url 'carts:remove' %}> {% csrf_token %}
                             <input type="hidden" name="product_id" value="{{ product.id }}">
-                            <input type="image"  src={% static "img/core-img/remove-from-cart.png" %} alt="remove">
+                            <input type="image" src={% static "img/core-img/remove-from-cart.png" %} alt="remove">
                         </form>
                     </div>
                 </td>

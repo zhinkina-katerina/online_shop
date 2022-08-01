@@ -10,13 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+
 import redis
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -29,7 +29,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,10 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',
+    'rest_framework.authtoken',
+
     'products',
     'search',
     'tags',
     'carts',
+    'orders',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -76,7 +80,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'online_shop.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -86,7 +89,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -106,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -120,7 +121,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -132,8 +132,7 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static_cdn', 'static_root')
 
 MEDIA_URL = '/media_root/'
-MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR), 'static_cdn', 'media_root' )
-
+MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR), 'static_cdn', 'media_root')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -141,3 +140,18 @@ MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR), 'static_cdn', 'media_root' )
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REDIS = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
+
+EMAIL_HOST = 'smtp.ukr.net'
+EMAIL_HOST_USER = 'katerina_zhinkina@ukr.net'
+EMAIL_HOST_PASSWORD = 'NSEDQn24wYLb6ZNF'
+EMAIL_PORT = 2525
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+LOGIN_REDIRECT_URL = 'index'
+ADMIN_MAIL = ''

@@ -1,4 +1,5 @@
 import uuid
+
 from django.conf import settings
 
 Redis = settings.REDIS
@@ -25,6 +26,14 @@ class CartManager:
     def remove_product_from_cart(cart_hex, product_id):
         Redis.hdel(cart_hex, product_id)
 
+    @staticmethod
+    def remove_cart(cart_hex):
+        Redis.delete(cart_hex)
 
+    @staticmethod
+    def get_all_carts():
+        return Redis.keys()
 
-
+    @staticmethod
+    def get_or_return_None(cart_hex):
+        return Redis.hgetall(cart_hex)

@@ -22,11 +22,7 @@ class CartView(TemplateView):
         self.cart_hex, self.cart = CartManager.get_or_create_cart(self.request)
         if not self.cart:
             return context
-
-        context['products'] = Product.objects.filter(id__in=self.cart.keys())
-        for item in context['products']:
-            item.quantity = self.cart[str(item.id)]
-        context['total'] = sum([item.price * int(item.quantity) for item in context['products']])
+        context['products'], context['total'] = Product.objects.get_products_with_quantity_and_total(self.cart)
         return context
 
     def render_to_response(self, context, **response_kwargs):

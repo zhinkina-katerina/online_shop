@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-    <html lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -22,54 +22,52 @@
 </head>
 
 
-    <body>
-    <!-- Search Wrapper Area Start -->
-    <div class="search-wrapper section-padding-100">
-        <div class="search-close">
-            <i class="fa fa-close" aria-hidden="true"></i>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    {% include 'search/snippets/search-form.html' %}
-                </div>
+<body>
+<!-- Search Wrapper Area Start -->
+<div class="search-wrapper section-padding-100">
+    <div class="search-close">
+        <i class="fa fa-close" aria-hidden="true"></i>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {% include 'search/snippets/search-form.html' %}
             </div>
         </div>
     </div>
-    <!-- Search Wrapper Area End -->
+</div>
+<!-- Search Wrapper Area End -->
 
-    <!-- ##### Main Content Wrapper Start ##### -->
-    <div class="main-content-wrapper d-flex clearfix">
-
-
-        {% include 'base/sidebar.html' %}
-        {% include 'base/shop_sidebar.html' %}
-        {%  block content %}
-        {% endblock %}
+<!-- ##### Main Content Wrapper Start ##### -->
+<div class="main-content-wrapper d-flex clearfix">
 
 
+    {% include 'base/sidebar.html' %}
+    {#        {% include 'base/shop_sidebar.html' %}#}
+    {% block content %}
+    {% endblock %}
 
 
-    </div>
-    <!-- ##### Main Content Wrapper End ##### -->
+</div>
+<!-- ##### Main Content Wrapper End ##### -->
 
-    {% include 'base/newsletter_area.html' %}
-    {% include 'base/footer.html' %}
+{% include 'base/newsletter_area.html' %}
+{% include 'base/footer.html' %}
 
 
-
-    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
-    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
-    <!-- Popper js -->
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <!-- Bootstrap js -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <!-- Plugins js -->
-    <script src="{% static  'js/plugins.js' %}"></script>
-    <!-- Active js -->
-    <script src="{% static 'js/active.js' %}"></script><a id="scrollUp" href="#top" style="display: none; position: fixed; z-index: 2147483647;"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
-
+<!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+<script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+<!-- Popper js -->
+<script src="{% static 'js/popper.min.js' %}"></script>
+<!-- Bootstrap js -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- Plugins js -->
+<script src="{% static  'js/plugins.js' %}"></script>
+<!-- Active js -->
+<script src="{% static 'js/active.js' %}"></script>
+<a id="scrollUp" href="#top" style="display: none; position: fixed; z-index: 2147483647;"><i class="fa fa-angle-up"
+                                                                                             aria-hidden="true"></i></a>
 
 
 </body>
-  </html>
+</html>

@@ -1,8 +1,10 @@
 from django.db import models
 from django.db.models.signals import pre_save
 
-from products.utils import unique_slug_generator
 from products.models import Product
+from products.utils import unique_slug_generator
+
+
 # Create your models here.
 class Tag(models.Model):
     title = models.CharField(max_length=120)
@@ -14,8 +16,10 @@ class Tag(models.Model):
     def __str__(self):
         return self.title
 
+
 def tags_pre_save_reciever(sender, instance, *args, **kwargs):
-        if not instance.slug:
-            instance.slug = unique_slug_generator(instance)
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
 
 pre_save.connect(tags_pre_save_reciever, sender=Tag)
