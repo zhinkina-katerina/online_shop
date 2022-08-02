@@ -139,7 +139,7 @@ MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR), 'static_cdn', 'media_root')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REDIS = redis.StrictRedis(host='localhost', port=6379, db=0, decode_responses=True)
+REDIS = redis.StrictRedis(host='redis', port=6379, db=0, decode_responses=True)
 
 EMAIL_HOST = 'smtp.ukr.net'
 EMAIL_HOST_USER = 'katerina_zhinkina@ukr.net'
