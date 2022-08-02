@@ -1,0 +1,74 @@
+[
+{
+    "model": "products.category",
+    "pk": 1,
+    "fields": {
+        "title": "Some Category",
+        "image": "/static/img/bg-img/1.jpg"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 2,
+    "fields": {
+        "title": "Another Category",
+        "image": "/static/img/bg-img/2.jpg"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 3,
+    "fields": {
+        "title": "Another Category",
+        "image": "/static/img/bg-img/3.jpg"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 4,
+    "fields": {
+        "title": "Another Category",
+        "image": "/static/img/bg-img/4.jpg"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 5,
+    "fields": {
+        "title": "Another Category",
+        "image": "/static/img/bg-img/5.jpg"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 6,
+    "fields": {
+        "title": "Another Category",
+        "image": "/static/img/bg-img/6.jpg"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 7,
+    "fields": {
+        "title": "Another Category",
+        "image": "/static/img/bg-img/7.jpg"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 8,
+    "fields": {
+        "title": "Another Category",
+        "image": "/static/img/bg-img/8.jpg"
+    }
+},
+{
+    "model": "products.category",
+    "pk": 9,
+    "fields": {
+        "title": "Another Category",
+        "image": "/static/img/bg-img/9.jpg"
+    }
+}
+]
