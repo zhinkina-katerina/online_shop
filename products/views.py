@@ -6,7 +6,22 @@ from .models import Product, Category
 
 class CategoryListView(ListView):
     template_name = 'index.html'
-    queryset = Category.objects.all()
+
+    def get_queryset(self):
+        queryset = Category.objects.all()[:9]
+        list_coordination = [{'left': 0, 'top': 0},
+                             {'left': 33.2912, 'top': 0},
+                             {'left': 66.6456, 'top': 0},
+                             {'left': 66.6456, 'top': 469},
+                             {'left': 0, 'top': 527},
+                             {'left': 33.2912, 'top': 749},
+                             {'left': 66.6456, 'top': 938},
+                             {'left': 0, 'top': 1055},
+                             {'left': 33.2912, 'top': 1219},]
+        for i, item in enumerate(queryset):
+            item.left = list_coordination[i]['left']
+            item.top = list_coordination[i]['top']
+        return queryset
 
 
 class ProductsByCategoryView(ListView):

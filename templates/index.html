@@ -8,14 +8,19 @@
 
             {% for category in object_list %}
                 <!-- Single Catagory -->
-
-                <a href="{% url 'products:product_by_category' pk=category.id %}">
-                    <img src="{{ category.image }}" alt="">
-                    <!-- Hover Content -->
-                    <h2>{{ category.title }}</h2>
-                </a>
-
+                <div class="single-products-catagory clearfix" style="position: absolute; left:{{category.left}}%; top: {{category.top}}px;">
+                    <a href="{% url 'products:product_by_category' pk=category.id %}">
+                        <img src="{{ category.image}}" alt="">
+                        <!-- Hover Content -->
+                        <div class="hover-content">
+                            <div class="line"></div>
+                            <p>From $180</p>
+                            <h4 href="{% url 'products:product_by_category' pk=category.id %}">{{ category.title }}</h4>
+                        </div>
+                    </a>
+                </div>
             {% endfor %}
+
         </div>
     </div>
 
