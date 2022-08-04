@@ -60,13 +60,13 @@ class ProductManager(models.Manager):
 
 class Product(models.Model):
     title = models.CharField(max_length=120)
-    slug = models.SlugField(blank=True, unique=True)
+    slug = models.SlugField(unique=True)
     description = models.TextField()
     price = models.DecimalField(decimal_places=2, max_digits=10)
     image = models.ImageField(upload_to=upload_image_path, null=True, blank=True)
     featured = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
 
     objects = ProductManager()
 

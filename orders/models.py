@@ -15,7 +15,7 @@ class Order(models.Model):
 
     date_creation = models.DateField(auto_now_add=True)
     status = models.CharField(choices=STATUS_CHOICES, max_length=200)
-    customer = models.ForeignKey('Customer', on_delete=models.CASCADE)
+    customer = models.ForeignKey('Customer', on_delete=models.SET_NULL, blank=True, null=True)
     total_price = models.DecimalField(decimal_places=2, max_digits=10)
     products = models.ManyToManyField(Product, through=ProductsInOrder)
 
@@ -27,4 +27,4 @@ class Customer(models.Model):
     email = models.EmailField(max_length=254)
     city = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)

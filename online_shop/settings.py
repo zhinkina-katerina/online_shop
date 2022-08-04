@@ -12,8 +12,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
-
+from dotenv import load_dotenv
 import redis
+import os
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -85,8 +88,12 @@ WSGI_APPLICATION = 'online_shop.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('BD_NAME'),
+        'USER': os.getenv('BD_USER'),
+        'PASSWORD': os.getenv('BD_PASSWORD'),
+        'HOST': os.getenv('BD_HOST'),
+        'PORT': os.getenv('BD_PORT'),
     }
 }
 
@@ -139,14 +146,18 @@ MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR), 'static_cdn', 'media_root')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REDIS = redis.StrictRedis(host='redis', port=6379, db=0, decode_responses=True)
+REDIS = redis.StrictRedis(host=os.getenv('REDIS_HOST'),
+                          port=os.getenv('REDIS_PORT'),
+                          db=os.getenv('REDIS_DB'),
+                          decode_responses=os.getenv('REDIS_DECODE_RESPONSE')
+                          )
 
-EMAIL_HOST = 'smtp.ukr.net'
-EMAIL_HOST_USER = 'katerina_zhinkina@ukr.net'
-EMAIL_HOST_PASSWORD = 'NSEDQn24wYLb6ZNF'
-EMAIL_PORT = 2525
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -154,4 +165,4 @@ REST_FRAMEWORK = {
     ],
 }
 LOGIN_REDIRECT_URL = 'index'
-ADMIN_MAIL = ''
+ADMIN_MAIL = os.getenv('ADMIN_MAIL')

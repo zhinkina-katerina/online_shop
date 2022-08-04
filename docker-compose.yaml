@@ -6,7 +6,7 @@ services:
     build: .
     command: bash -c "python manage.py migrate --no-input &&
       python manage.py loaddata fixtures/product.json fixtures/category.json &&
-      python manage.py runserver 0.0.0.0:8000"
+      python manage.py runserver"
     ports:
       - "8000:8000"
     links:
